@@ -3,10 +3,9 @@ import { get } from 'lodash';
 
 
 export default function App() {
-
     const searchParams = new URLSearchParams(window.location.search);
     const dataParam = searchParams.get('data');
-    console.log("🚀 ~ App ~ dataParam:", dataParam)
+
 
     const data = JSON.parse(dataParam);
     let  legends = get(data, 'legends', [])
