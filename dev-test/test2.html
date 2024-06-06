@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Matrix Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix"></script>
+    <style>
+        .chart-tooltip {
+            font-size: 0.313rem;
+            color: #000;
+            border: 0.063rem solid #e7e7e7;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="matrixChart" width="600" height="400"></canvas>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('matrixChart').getContext('2d');
+
+            // Example data. Replace this with your dynamic data.
+            const data = [
+                { x: 0, y: 0, v: 10, percentage: 0.1 },
+                { x: 0, y: 1, v: 20, percentage: 0.2 },
+                { x: 1, y: 0, v: 30, percentage: 0.3 },
+                { x: 1, y: 1, v: 40, percentage: 0.4 },
+                { x: 2, y: 0, v: 50, percentage: 0.5 },
+                { x: 2, y: 1, v: 60, percentage: 0.6 }
+            ];
+
+            const xLabels = new Array(10).fill(0).map((_, i) => i + 1);
+            const yLabelsVisibility = [
+                "1-1", "2-2", "3-3", "4-4", "5-5",
+                "6-6", "7-7", "8-8", "9-9", "10-10"
+            ];  // Example yLabels. Replace with your data.
+
+            const dataset = data.map(d => ({
+                x: parseInt(d.x),
+                y: yLabelsVisibility.indexOf(d.y.toString() + '-' + d.y.toString()),
+                v: d.v,
+                percentage: d.percentage
+            }));
+
+            const config = {
+                type: 'matrix',
+                data: {
+                    datasets: [{
+                        label: 'Matrix Dataset',
+                        data: dataset,
+                        backgroundColor: function (ctx) {
+                            const value = ctx.raw.percentage;
+                            return `rgba(254, 169, 78, ${value})`;
+                        },
+                        width: function (ctx) {
+                            return ctx.chart.chartArea.width / 10;  // Example width
+                        },
+                        height: function (ctx) {
+                            return ctx.chart.chartArea.height / 10; // Example height
+                        }
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            min: 0,
+                            max: xLabels.length - 1,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function (value) {
+                                    return xLabels[value];
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'X Axis'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            min: 0,
+                            max: yLabelsVisibility.length - 1,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function (value) {
+                                    return yLabelsVisibility[value];
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Y Axis'
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: (tooltipItems) => {
+                                    return `x: ${xLabels[tooltipItems[0].raw.x]}, y: ${yLabelsVisibility[tooltipItems[0].raw.y]}`;
+                                },
+                                label: (tooltipItem) => {
+                                    return `Value: ${tooltipItem.raw.v}`;
+                                }
+                            },
+                            titleFont: {
+                                size: 10,
+                                weight: 'normal',
+                                color: '#000',
+                            },
+                            bodyFont: {
+                                size: 10,
+                                weight: 'normal',
+                                color: '#000',
+                            },
+                            borderColor: '#e7e7e7',
+                            borderWidth: 1,
+                        }
+                    },
+                    elements: {
+                        rectangle: {
+                            borderWidth: 0.063,
+                            borderColor: '#e7e7e7'
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
+</body>
+
+</html>

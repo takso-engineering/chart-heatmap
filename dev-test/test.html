@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Heatmap Example</title>
+    <!-- Include Chart.js from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Matrix plugin for Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix"></script>
+</head>
+
+<body>
+    <h1>Chart.js Heatmap Example</h1>
+    <div style="height: 450px;width: 1300px; ">
+
+        <canvas id="myHeatmap"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myHeatmap').getContext('2d');
+        const cellSize = 20; // Adjust the size of each cell
+
+        const myChart = new Chart(ctx, {
+            type: 'matrix',
+            data: {
+                datasets: [{
+                    label: 'Heatmap',
+                    data: [
+                        { x: 0, y: 0, v: 2 }
+                    ],
+                    backgroundColor: (context) => {
+                        const value = context.dataset.data[context.dataIndex].v;
+                        const alpha = (value - 1) / 9;
+                        return `rgba(0, 0, 255, ${alpha})`;
+                    },
+                    borderWidth: 1,
+                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                    width: 20,
+                    height: 10 // Adjusted cell height
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        min: 0,
+                        max: 9,
+                        ticks: {
+                            callback: (value) => (value + 1).toString()
+                        },
+                        title: {
+                            display: true,
+                            text: 'Columns'
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        min: 0,
+                        max: 9,
+                        ticks: {
+                            callback: (value) => (10 - value).toString() // Reverse order of ticks
+                        },
+                        title: {
+                            display: true,
+                            text: 'Rows'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: (tooltipItems) => {
+                                const item = tooltipItems[0];
+                                return `Row: ${item.parsed.y + 1}, Col: ${item.parsed.x + 1}`;
+                            },
+                            label: (tooltipItem) => `Value: ${tooltipItem.raw.v}`
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
