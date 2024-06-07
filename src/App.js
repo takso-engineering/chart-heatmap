@@ -23,25 +23,29 @@ export default function App() {
     }
  
     return (
-        <div style={{ border: '1px solid #e0e0e0', }}>
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    borderBottom: '1px solid #e0e0e0',
-                    marginBottom: '20px',
-                    // width: '100%',
-                    padding: '0px 20px'
-                }}
-            >
-                {legends.map(column => (
-                    <div key={column.key} style={{ flex: 1, padding: '10px', textAlign: 'center' }}>
-                        {`${column.label} : ${column.value}`}
-                    </div>
-                ))}
-            </div>
-            <div style={{ padding: '20px', }}>
-                <HeatMapComponent participantsChange={{ results: get(data, 'results', []),}} />
+        <div style= {{ height: "500px"}}>
+     
+            <div style={{ border: '1px solid #e0e0e0', }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        borderBottom: '1px solid #e0e0e0',
+                        marginBottom: '20px',
+                        // width: '100%',
+                        padding: '0px 20px',
+                        fontSize: '24px',
+                    }}
+                >
+                    {legends.map(column => (
+                        <div   key={column.key} style={{ flex: 1, padding: '10px', textAlign: 'center', fontSize: '14px', }}>
+                            {`${column.label} : ${column.value}`}
+                        </div>
+                    ))}
+                </div>
+                <div style={{ padding: '20px', }}>
+                    <HeatMapComponent participantsChange={{ results: get(data, 'results', []),}} />
+                </div>
             </div>
         </div>
 

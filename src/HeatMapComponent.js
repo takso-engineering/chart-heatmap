@@ -294,7 +294,7 @@ import HeatMap from 'react-light-heatmap';
     da.summary = summary;
   }
 
- 
+  
  
   return (
     <div className="outcomes-summary-chart-div">
@@ -325,13 +325,13 @@ import HeatMap from 'react-light-heatmap';
                   width
                 ) => ({
                   background: `rgb(254, 169, 78, ${value.percentage})`,
-                  fontSize: '0.313rem',
+                  fontSize: '9px', // Adjust the font size as needed
                   color: '#000',
-                  height: '0.625rem',
+                  height: `12px`,
                   width: '5vw',
-                  padding: '0rem',
-                  border: '0.063rem solid #e7e7e7',
-                  margin: '0',
+                  padding: '0px',
+                  border: '1px solid #e7e7e7',
+                  margin: '0px',
                 })}
                 components={{
                   Cell: (v) => renderCellHover(v),
