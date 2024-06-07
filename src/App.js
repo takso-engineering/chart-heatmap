@@ -21,9 +21,9 @@ export default function App() {
             value: `${(Number(_totalRespondents) / Number(_totalParticipants)) * 100}%`
         }]
     }
- 
+ 895-36-20
     return (
-        <div style= {{ height: "500px"}}>
+        <div style= {{ height: "895px"}}>
      
             <div style={{ border: '1px solid #e0e0e0', }}>
                 <div
@@ -43,7 +43,7 @@ export default function App() {
                         </div>
                     ))}
                 </div>
-                <div style={{ padding: '20px', fontSize: "14px"}}>
+                <div style={{ padding: '20px', fontSize: "10px"}}>
                     <HeatMapComponent participantsChange={{ results: get(data, 'results', []),}} />
                 </div>
             </div>
