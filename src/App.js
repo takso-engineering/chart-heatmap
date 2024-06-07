@@ -43,7 +43,7 @@ export default function App() {
                         </div>
                     ))}
                 </div>
-                <div style={{ padding: '20px', }}>
+                <div style={{ padding: '20px', fontSize: "14px"}}>
                     <HeatMapComponent participantsChange={{ results: get(data, 'results', []),}} />
                 </div>
             </div>

@@ -327,7 +327,7 @@ import HeatMap from 'react-light-heatmap';
                   background: `rgb(254, 169, 78, ${value.percentage})`,
                   fontSize: '9px', // Adjust the font size as needed
                   color: '#000',
-                  height: `12px`,
+                  height: `8px`,
                   width: '5vw',
                   padding: '0px',
                   border: '1px solid #e7e7e7',
