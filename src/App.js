@@ -21,7 +21,7 @@ export default function App() {
             value: `${(Number(_totalRespondents) / Number(_totalParticipants)) * 100}%`
         }]
     }
- 895-36-20
+
     return (
         <div style= {{ height: "895px"}}>
      
